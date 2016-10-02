@@ -9,22 +9,21 @@ import re
 def printdir(path, padding):
     files = []
     files = filesort(path)
-    file_num = len(files)
-    for i in range(file_num):
-        if i == file_num - 1:
-            print(padding + '└── ' + str(files[i]))
+    for i, filename in enumerate(files):
+        fullpath = path + "/" + filename
+        if i == len(files) - 1:
+            print(padding + '└── ' + str(filename))
             sub_padding = '    '
         else:
-            print(padding + '├── ' + str(files[i]))
+            print(padding + '├── ' + str(filename))
             sub_padding = '│   '
-        if os.path.isdir(os.path.join(path, files[i])):
-            path = os.path.join(path, files[i])
-            printdir(path, padding + sub_padding)
+        if os.path.isdir(fullpath):
+            printdir(fullpath, padding + sub_padding)
 
 
 def filesort(path):
     files = [f for f in os.listdir(path) if not f.startswith('.')]
-    file_sort = sorted(files, key=lambda x: re.sub('[^A-Za-z0-9]+', '', x).lower())
+    file_sort = sorted(files, key=lambda x: re.sub('[^a-zA-Z0-9]+', '', x).lower())
     return file_sort
 
 
