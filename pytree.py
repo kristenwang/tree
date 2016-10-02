@@ -12,14 +12,14 @@ def printdir(path, padding, dir):
     for fi in dirs:
         if not fi.startswith('.'):
             files.append(fi)
-    file_num=len(files)
+    file_num = len(files)
     for i in range(file_num):
         for k in range(dir_num):
             if(files[i] == dir[k]):
-                print( padding+'├── ' + files[i])
-                printdir(path+os.sep+dir[k], padding+'│   ', dir[k:])
-            elif(i<k):
-            	print(padding + '├── ' + files[i])
+                print(padding + '├── ' + files[i])
+                printdir(path + os.sep + dir[k], padding+'│   ', dir[k:])
+            elif(i < k):
+                print(padding + '├── ' + files[i])
         if (i == file_num - 1):
             print(padding + '└── ' + files[i])
         elif(dir_num == 1):
@@ -30,7 +30,6 @@ def tree(path, padding):
     files_n = []
     dirs_n = []
     root_n = []
-    print('.')
     for root, dirs, files in os.walk(path):
         for f in files:
             if not f.startswith('.'):
@@ -38,7 +37,7 @@ def tree(path, padding):
         for d in dirs:
             if not d.startswith('.'):
                 dirs_n.append(d)
-    file_num=len(files_n)
+    file_num = len(files_n)
     dir_num = len(dirs_n)
     printdir(path, padding, dirs_n)
     print('')
@@ -49,12 +48,12 @@ def tree(path, padding):
 if __name__ == '__main__':
     # just for demo
     # subprocess.run(['tree'] + sys.argv[1:])
-
+    print('.')
     if len(sys.argv) == 1:
-    	path = os.getcwd()
-    	tree(path, '')
-    elif len(sys.argv) == 2:
+        path = os.getcwd()
+        tree(path, '')
+    elif len(sys.argv) >= 2:
         path = sys.argv[1]
         tree(path, '')
     else:
-    	print('Wrong Input')
+        print('Wrong Input')
