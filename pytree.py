@@ -17,7 +17,7 @@ def printdir(path, padding, dir):
         for k in range(dir_num):
             if(files[i] == dir[k]):
                 print(padding + '├── ' + files[i])
-                printdir(path + os.sep + dir[k], padding+'│   ', dir[k:])
+                printdir(path + os.sep + dir[k], padding + '│   ', dir[k:])
             elif(i < k):
                 print(padding + '├── ' + files[i])
         if (i == file_num - 1):
@@ -27,16 +27,14 @@ def printdir(path, padding, dir):
 
 
 def tree(path, padding):
-    files_n = []
     dirs_n = []
     root_n = []
     for root, dirs, files in os.walk(path):
-        for f in files:
-            if not f.startswith('.'):
-                files_n.append(f)
-        for d in dirs:
-            if not d.startswith('.'):
-                dirs_n.append(d)
+        files_n=[f for f in files if not f.startswith('.')]
+        # for d in dirs:
+        #    if not d.startswith('.'):
+        #        dirs_n.append(d)
+        dirs_n=[d for d in dirs if not d.startswith('.')]
     file_num = len(files_n)
     dir_num = len(dirs_n)
     printdir(path, padding, dirs_n)
