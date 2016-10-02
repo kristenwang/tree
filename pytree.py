@@ -25,6 +25,11 @@ def printdir(path, padding, dir):
         elif(dir_num == 1):
             print(padding + '├── ' + files[i])
 
+def countdir(dirs, dirs_n):
+    for d in dirs:
+        if not d.startswith('.'):
+            dirs_n.append(d)
+    return dirs_n
 
 def tree(path, padding):
     file_num = 0
@@ -32,9 +37,7 @@ def tree(path, padding):
     for root, dirs, files in os.walk(path):
         files_n = [f for f in files if not f.startswith('.')]
         file_num = file_num + len(files_n)
-        for d in dirs:
-           if not d.startswith('.'):
-               dirs_n.append(d)
+        dirs_n = countdir(dirs, dirs_n)
     dir_num = len(dirs_n)
     printdir(path, padding, dirs_n)
     print('')
