@@ -8,10 +8,7 @@ import os
 def printdir(path, padding, dir):
     dir_num = len(dir)
     dirs = os.listdir(path)
-    files = []
-    for fi in dirs:
-        if not fi.startswith('.'):
-            files.append(fi)
+    files = [x for x in os.listdir(path) if x[0] != '.']
     file_num = len(files)
     for i in range(file_num):
         for k in range(dir_num):
@@ -33,15 +30,16 @@ def countdir(dirs, dirs_n):
     return dirs_n
 
 
-def tree(path, padding):
-    file_num = 0
+def tree(path):
     dirs_n = []
+    file_n = []
     for root, dirs, files in os.walk(path):
-        files_n = [f for f in files if not f.startswith('.')]
-        file_num = file_num + len(files_n)
+        files_n = countdir(files, file_n)
+        # file_num = file_num + len(files_n)
         dirs_n = countdir(dirs, dirs_n)
     dir_num = len(dirs_n)
-    printdir(path, padding, dirs_n)
+    file_num = len(files_n)
+    printdir(path, '', dirs_n)
     print('')
     print("%s directories, %s files" % (dir_num, file_num))
 
@@ -51,10 +49,9 @@ if __name__ == '__main__':
     # subprocess.run(['tree'] + sys.argv[1:])
     print('.')
     if len(sys.argv) == 1:
-        path = os.getcwd()
-        tree(path, '')
+        tree(os.getcwd())
     elif len(sys.argv) >= 2:
         path = sys.argv[1]
-        tree(path, '')
+        tree(path)
     else:
         print('Wrong Input')
