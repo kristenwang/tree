@@ -29,20 +29,17 @@ def filesort(path):
 
 
 def countdir(dirs, dirs_n):
-    for d in dirs:
-        if not d.startswith('.'):
-            dirs_n.append(d)
+    dirs = [d for d in dirs if not d.startswith('.')]
+    dirs_n = dirs_n + len(dirs)
     return dirs_n
 
 
 def tree(path):
-    dirs_n = []
-    file_n = []
+    dir_num = 0
+    file_num = 0
     for root, dirs, files in os.walk(path):
-        files_n = countdir(files, file_n)
-        dirs_n = countdir(dirs, dirs_n)
-    dir_num = len(dirs_n)
-    file_num = len(files_n)
+        file_num = countdir(files, file_num)
+        dir_num = countdir(dirs, dir_num)
     printdir(path, '')
     print('')
     print("%s directories, %s files" % (dir_num, file_num))
