@@ -7,7 +7,6 @@ import re
 
 # YOUR CODE GOES here
 def printdir(path, padding):
-    dirs = os.listdir(path)
     files = [x for x in os.listdir(path) if x[0] != '.']
     file_num = len(files)
     for i in range(file_num):
@@ -18,7 +17,8 @@ def printdir(path, padding):
             print(padding + '├── ' + files[i])
             sub_padding = '│   '
         if os.path.isdir(os.path.join(path, files[i])):
-           printdir(os.path.join(path, files[i]), padding + sub_padding)
+            path = os.path.join(path, files[i])
+            printdir(path, padding + sub_padding)
 
 
 def countdir(dirs, dirs_n):
@@ -42,8 +42,6 @@ def tree(path):
 
 
 if __name__ == '__main__':
-    # just for demo
-    # subprocess.run(['tree'] + sys.argv[1:])
     print('.')
     if len(sys.argv) == 1:
         path = os.getcwd()
