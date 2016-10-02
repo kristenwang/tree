@@ -43,11 +43,11 @@ def tree(path):
     for root, dirs, files in os.walk(path):
         file_num = countdir(files, files_num)
         files_num += file_num
-        dir_num = countdir(dirs, dirs_num)
-        dirs_num += dir_num
+        dirs[:] = [d for d in dirs if not d.startswith('.')]
+        dirs_num = dirs_num + len(dirs)
     printdir(path, '')
     print('')
-    print("%s directories, %s files" % (dirs_num, files_num))
+    print(str(dirs_num) + ' directories, ' + str(files_num) + ' files')
 
 
 if __name__ == '__main__':
@@ -57,4 +57,4 @@ if __name__ == '__main__':
     else:
         path = sys.argv[1]
         print(path)
-    tree(path)
+tree(path)
