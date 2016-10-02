@@ -5,32 +5,31 @@ import os
 
 
 # YOUR CODE GOES here
-def printdir(path,padding,dir):
+def printdir(path, padding, dir):
     dir_num = len(dir)
     dirs = os.listdir(path)
-    files=[]
+    files = []
     for fi in dirs:
         if not fi.startswith('.'):
             files.append(fi)
     file_num=len(files)
     for i in range(file_num):
         for k in range(dir_num):
-            if(files[i]==dir[k]):
+            if(files[i] == dir[k]):
                 print( padding+'├── ' + files[i])
-                printdir(path+os.sep+dir[k],padding+'│   ', dir[k:])
+                printdir(path+os.sep+dir[k], padding+'│   ', dir[k:])
             elif(i<k):
-            	print( padding+'├── ' + files[i])
+            	print(padding + '├── ' + files[i])
         if (i == file_num - 1):
-            print(padding+'└── ' + files[i])
-        elif(dir_num==1):
-            print(padding+ '├── ' + files[i])
+            print(padding + '└── ' + files[i])
+        elif(dir_num == 1):
+            print(padding + '├── ' + files[i])
 
 
-def tree(path,padding):
-    file_num = 0
-    files_n=[]
-    dirs_n=[]
-    root_n=[]
+def tree(path, padding):
+    files_n = []
+    dirs_n = []
+    root_n = []
     print('.')
     for root, dirs, files in os.walk(path):
         for f in files:
@@ -41,7 +40,7 @@ def tree(path,padding):
                 dirs_n.append(d)
     file_num=len(files_n)
     dir_num = len(dirs_n)
-    printdir(path,padding,dirs_n)
+    printdir(path, padding, dirs_n)
     print('')
     print("%s directories, %s files" % (dir_num, file_num))
 
@@ -53,9 +52,9 @@ if __name__ == '__main__':
 
     if len(sys.argv)==1:
     	path = os.getcwd()
-    	tree(path,'')
+    	tree(path, '')
     elif len(sys.argv)==2:
         path = sys.argv[1]
-        tree(path,'')
+        tree(path, '')
     else:
     	print("Wrong Input")
