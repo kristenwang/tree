@@ -27,15 +27,14 @@ def printdir(path, padding, dir):
 
 
 def tree(path, padding):
+    file_num = 0
     dirs_n = []
-    root_n = []
     for root, dirs, files in os.walk(path):
-        files_n=[f for f in files if not f.startswith('.')]
-        # for d in dirs:
-        #    if not d.startswith('.'):
-        #        dirs_n.append(d)
-        dirs_n=[d for d in dirs if not d.startswith('.')]
-    file_num = len(files_n)
+        files_n = [f for f in files if not f.startswith('.')]
+        file_num = file_num + len(files_n)
+        for d in dirs:
+           if not d.startswith('.'):
+               dirs_n.append(d)
     dir_num = len(dirs_n)
     printdir(path, padding, dirs_n)
     print('')
