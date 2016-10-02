@@ -4,6 +4,7 @@ import sys
 import os
 import re
 
+
 # YOUR CODE GOES here
 def printdir(path, padding):
     dirs = os.listdir(path)
@@ -18,7 +19,6 @@ def printdir(path, padding):
             sub_padding = '│   '
         if os.path.isdir(os.path.join(path, files[i])):
            printdir(os.path.join(path, files[i]), padding + sub_padding)
-
 
 
 def countdir(dirs, dirs_n):
