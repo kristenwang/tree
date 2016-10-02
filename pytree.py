@@ -7,7 +7,8 @@ import re
 
 # YOUR CODE GOES here
 def printdir(path, padding):
-    files = [f for f in os.listdir(path) if not f.startswith('.')]
+    files = []
+    files = filesort(path)
     file_num = len(files)
     for i in range(file_num):
         if i == file_num - 1:
@@ -19,6 +20,12 @@ def printdir(path, padding):
         if os.path.isdir(os.path.join(path, files[i])):
             path = os.path.join(path, files[i])
             printdir(path, padding + sub_padding)
+
+
+def filesort(path):
+    files = [f for f in os.listdir(path) if not f.startswith('.')]
+    file_sort = sorted(files, key=lambda x: re.sub('[^A-Za-z0-9]+', '', x).lower())
+    return file_sort
 
 
 def countdir(dirs, dirs_n):
