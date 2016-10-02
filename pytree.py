@@ -28,21 +28,26 @@ def filesort(path):
     return file_sort
 
 
-def countdir(dirs, dirs_n):
-    dirs = [d for d in dirs if not d.startswith('.')]
-    dirs_n = dirs_n + len(dirs)
-    return dirs_n
+def countdir(dirs, dir_n):
+    names = []
+    for d in dirs:
+        if not d.startswith('.'):
+            names.append(d)
+    dir_n = len(names)
+    return dir_n
 
 
 def tree(path):
-    dir_num = 0
-    file_num = 0
+    dirs_num = 0
+    files_num = 0
     for root, dirs, files in os.walk(path):
-        file_num = countdir(files, file_num)
-        dir_num = countdir(dirs, dir_num)
+        file_num = countdir(files, files_num)
+        files_num += file_num
+        dir_num = countdir(dirs, dirs_num)
+        dirs_num += dir_num
     printdir(path, '')
     print('')
-    print("%s directories, %s files" % (dir_num, file_num))
+    print("%s directories, %s files" % (dirs_num, files_num))
 
 
 if __name__ == '__main__':
