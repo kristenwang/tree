@@ -48,13 +48,13 @@ def tree(path, padding):
 
 if __name__ == '__main__':
     # just for demo
-    #subprocess.run(['tree'] + sys.argv[1:])
+    # subprocess.run(['tree'] + sys.argv[1:])
 
-    if len(sys.argv)==1:
+    if len(sys.argv) == 1:
     	path = os.getcwd()
     	tree(path, '')
-    elif len(sys.argv)==2:
+    elif len(sys.argv) == 2:
         path = sys.argv[1]
         tree(path, '')
     else:
-    	print("Wrong Input")
+    	print('Wrong Input')
