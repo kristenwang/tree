@@ -44,7 +44,6 @@ def tree(path, padding):
     print("%s directories, %s files" % (dir_num, file_num))
 
 
-
 if __name__ == '__main__':
     # just for demo
     # subprocess.run(['tree'] + sys.argv[1:])
