@@ -7,7 +7,7 @@ import re
 
 # YOUR CODE GOES here
 def printdir(path, padding):
-    files = [x for x in os.listdir(path) if x[0] != '.']
+    files = [f for f in os.listdir(path) if not f.startswith('.')]
     file_num = len(files)
     for i in range(file_num):
         if (i == file_num - 1):
