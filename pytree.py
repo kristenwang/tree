@@ -10,11 +10,11 @@ def printdir(path, padding):
     files = [f for f in os.listdir(path) if not f.startswith('.')]
     file_num = len(files)
     for i in range(file_num):
-        if (i == file_num - 1):
-            print(padding + '└── ' + files[i])
+        if i == file_num - 1:
+            print(padding + '└── ' + str(files[i]))
             sub_padding = '    '
         else:
-            print(padding + '├── ' + files[i])
+            print(padding + '├── ' + str(files[i]))
             sub_padding = '│   '
         if os.path.isdir(os.path.join(path, files[i])):
             path = os.path.join(path, files[i])
@@ -42,9 +42,10 @@ def tree(path):
 
 
 if __name__ == '__main__':
-    print('.')
     if len(sys.argv) == 1:
         path = os.getcwd()
+        print('.')
     else:
         path = sys.argv[1]
+        print(path)
     tree(path)
